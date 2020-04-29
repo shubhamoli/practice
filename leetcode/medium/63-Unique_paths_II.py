@@ -21,11 +21,15 @@ class Solution:
         # set element in first column to 1
         # as there is only 1 way to reach them
         for i in range(n):
+            if obstacleGrid[0][i] == 1:
+                break
             matrix[0][i] = 1
 
         # set element in first row to 1
         # as there is only 1 way to reach them
         for i in range(m):
+            if obstacleGrid[i][0] == 1:
+                break
             matrix[i][0] = 1
 
         # expand like we're increasing m and n
