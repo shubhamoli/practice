@@ -10,6 +10,25 @@ class ListNode():
         self.next = None
 
 
+# original question is somewhat misphrased
+# you just have to delete the provided node
+def deleteNode(n: ListNode):
+
+    if n == None and n.next == None:
+        return False
+
+    # idea here is to
+    # replace itself by the very next node
+    # a->b->c->d (delete c)
+    # a->b->d
+    # but it will not work for last node as it's next is None
+    tmp = n.next
+    n.val = tmp.val
+    n.next = tmp.next
+    return True
+
+
+# This is to delete logically middle node of a LL
 def deleteMiddle(head: ListNode) -> ListNode:
 
     if not head:
@@ -31,6 +50,7 @@ def deleteMiddle(head: ListNode) -> ListNode:
     slow.next = slow.next.next
 
     return head
+
 
 
 if __name__ == "__main__":
