@@ -10,63 +10,30 @@ class ListNode:
         self.next = None
 
 
-def partition_stable(head: ListNode, x:int) -> ListNode:
-    beforeStart = None
-    beforeEnd = None
-    afterStart = None
-    afterEnd = None
+def partition(head: ListNode, x:int) -> ListNode:
+    before = ListNode(0)
+    b_tmp = before
+
+    after = ListNode(0)
+    a_tmp = after
 
     curr = head
 
     while curr:
-        tmp = curr.next
-
         if curr.val < x:
-            if beforeStart == None:
-                beforeStart = curr
-                beforeEnd = beforeStart
-            else:
-                beforeEnd.next = curr
-                beforeEnd = curr
+            b_tmp.next = curr
+            b_tmp = b_tmp.next
         else:
-            if afterStart == None:
-                afterStart = curr
-                afterEnd = afterStart
-            else:
-                afterEnd.next = curr
-                afterEnd = curr
+            a_tmp.next = curr
+            a_tmp = a_tmp.next
 
-        curr = tmp
+        curr = curr.next
 
-    if beforeStart == None:
-        return afterStart
+    a_tmp.next = None
+    b_tmp.next = after.next
 
-    beforeStart.next = afterStart
+    return before.next
 
-    return beforeStart
-
-def partition(head: ListNode, x: int) -> ListNode:
-
-    before = head
-    after = head
-
-    curr = head
-    while curr:
-        tmp = curr.next
-        print(curr.val)
-        if curr.val < x:
-            # insert current node before "head"
-            curr.next = before
-            before = curr
-        else:
-            after.next = curr
-            after = curr
-
-        curr = tmp
-
-    after.next = None
-
-    return before
 
 
 if __name__ == "__main__":
@@ -87,4 +54,4 @@ if __name__ == "__main__":
     ll.next.next.next.next.next = ListNode(2)
     ll.next.next.next.next.next.next = ListNode(1)
 
-    printll(partition_stable(ll, 5))
+    printll(partition(ll, 5))
