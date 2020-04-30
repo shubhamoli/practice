@@ -2,7 +2,6 @@
     2.1 - Write a code to remove duplicates from unsorted linked list
 """
 
-
 # Definition of a ListNode
 class ListNode():
     def __init__(self, val):
@@ -36,6 +35,30 @@ def dedupe(head: ListNode) -> ListNode:
     return head
 
 
+# O(n^2) solution
+# as no buffer is allowed to track occurrences
+def dedupe_no_buffer(head: ListNode) -> ListNode:
+
+    if not head:
+        return None
+
+    if not head.next:
+        return head
+
+    current = head
+
+    # O(n^2)
+    while current:
+        tmp = current
+        while tmp.next != None:
+            if tmp.next.val == current.val:
+                tmp.next = tmp.next.next
+            else:
+                tmp = tmp.next
+        current = current.next
+
+    return head
+
 
 if __name__ == "__main__":
 
@@ -54,3 +77,4 @@ if __name__ == "__main__":
 
 
     printll(dedupe(ll1))
+    printll(dedupe_no_buffer(ll1))
