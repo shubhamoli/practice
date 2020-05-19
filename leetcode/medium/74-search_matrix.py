@@ -36,26 +36,22 @@ class Solution:
         if target == None or target < matrix[0][0] or target > matrix[-1][-1]:
             return False
 
-        nrows = len(matrix)
-        ncols = len(matrix[0])
+        M = len(matrix)
+        N = len(matrix[0])
 
-        def binary(items, target):
-            lo, hi = 0, len(items) - 1
-            while lo < hi:
-                mid = (lo + hi + 1) // 2
-                if items[mid] > target:
-                    hi = mid - 1
-                else:
-                    lo = mid
+        l = 0
+        r = M * N - 1
+        while l != r:
+            mid = (l + r) // 2
+            if matrix[mid // N][mid % N] == target:
+                return True
 
-            return lo
+            if matrix[mid // N][mid % N] < target:
+                l = mid + 1
+            else:
+                r = mid
 
-        # Binary search in row
-        # binary search in col
-        r = binary([row[0] for row in matrix], target)
-        c = binary(matrix[r], target)
-
-        return matrix[r][c] == target
+        return False
 
 
 if __name__ == "__main__":
