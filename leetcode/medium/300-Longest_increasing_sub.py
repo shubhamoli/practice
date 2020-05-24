@@ -4,33 +4,20 @@
 
 
 from typing import List
+import bisect
+
 
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
+        inc = [float("inf")] * len(nums)
 
-        memo = [[-1 for i in range(len(nums)+1)] for j in range(len(nums))]
+        size = 0
+        for num in nums:
+            i = bisect.bisect_left(inc, num)
+            inc[i] = num
+            size = max(i+1, size)
 
-        def helper(idx, prevIdx):
-            if idx == len(nums):
-                return 0
-
-            if memo[prevIdx+1][idx] >= 0:
-                return memo[prevIdx+1][idx]
-
-            taken = 0
-            # taking current item
-            if prevIdx < 0 or nums[idx] > nums[prevIdx]:
-                taken = 1 + helper(idx+1, idx)
-
-            # skipping current item
-            not_taken = helper(idx+1, prevIdx)
-
-            memo[prevIdx+1][idx] = max(taken, not_taken)
-
-            return memo[prevIdx+1][idx]
-
-        return helper(0, -1)
-
+        return size
 
 if __name__ == "__main__":
 
