@@ -13,9 +13,13 @@ class Solution:
 
         for i in range(1, amount + 1):
             for c in coins:
-                if i - c >= 0:
-                    dp[i] = min(dp[i], dp[i-c] + 1)
+                # amount is larger than current coin
+                # proceed
+                if c <= i:
+                    # reducing amount by c (dp[i-c]) must be solved by now
+                    dp[i] = min(dp[i], 1 + dp[i-c])
 
+        # if last is not solved
         if dp[-1] == MAX:
             return -1
 
