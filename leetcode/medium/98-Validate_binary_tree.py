@@ -31,6 +31,30 @@ class Solution:
 
         return (left and right)
 
+    # leveraging a property of the BST
+    # inorder traversal of a BST is sorted in ascending order
+    def isValidBST_ALT(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+
+        def inorder(node):
+            if not node:
+                return
+
+            inorder(node.left)
+            arr.append(node.val)
+            inorder(node.right)
+
+        arr = []
+        inorder(root)
+
+        # check whether inorder is sorted or not
+        for i in range(len(arr)-1):
+            if arr[i] >= arr[i+1]:
+                return False
+
+        return True
+
 
 
 if __name__ == "__main__":
@@ -58,4 +82,9 @@ if __name__ == "__main__":
     assert solution.isValidBST(tree2) == False
     assert solution.isValidBST(tree3) == False
     assert solution.isValidBST(tree4) == True
+
+    assert solution.isValidBST_ALT(tree1) == True
+    assert solution.isValidBST_ALT(tree2) == False
+    assert solution.isValidBST_ALT(tree3) == False
+    assert solution.isValidBST_ALT(tree4) == True
 
