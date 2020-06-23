@@ -27,7 +27,7 @@ class StockSpanner:
 
         return count
 
-    # using stacks
+    # using monotonic stacks
     # it may seem more than O(n) in first sight
     # but since each element is inserted and popped from stack only once
     # so it O(2n) == O(n) operation only
