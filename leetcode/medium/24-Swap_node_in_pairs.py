@@ -3,10 +3,8 @@
 """
 
 
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+from leetcode.utils import ListNode, printLL, generateLL
+
 
 class Solution:
     def swapPairs(self, head: ListNode) -> ListNode:
@@ -32,18 +30,8 @@ class Solution:
 
 if __name__ == "__main__":
 
-    def printll(ll):
-        while ll:
-            print(ll.val, end="->")
-            ll = ll.next
-
-        print()
-
     solution = Solution()
 
-    ll = ListNode(1)
-    ll.next = ListNode(2)
-    ll.next.next = ListNode(3)
-    ll.next.next.next = ListNode(4)
+    ll = generateLL([1, 2, 3, 4])
 
-    printll(solution.swapPairs(ll))
+    printLL(solution.swapPairs(ll))
